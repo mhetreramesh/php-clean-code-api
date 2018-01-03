@@ -1,0 +1,25 @@
+{
+    "name": "REST API Test",
+    "description": "REST API Test for Recepie API's",
+    "keywords": ["REST API", "Core PHP", "Unit Test"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ramesh Mhetre",
+            "email": "mhetreramesh@gmail.com",
+            "role": "Creator / Main Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "filp/whoops": "~2.1",
+        "patricklouys/http": "~1.4",
+        "nikic/fast-route": "~1.2",
+        "rdlowrey/auryn": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "RestApi\\": "src/"
+        }
+    }
+}
