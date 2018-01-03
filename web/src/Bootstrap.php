@@ -3,14 +3,14 @@
 $request = new \Http\HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 $response = new \Http\HttpResponse;
 
-$dispatcher = \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/', function () {
-        echo 'Hello World';
-    });
-    $r->addRoute('GET', '/route', function () {
-        echo 'This works too';
-    });
-});
+$routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
+    $routes = include_once(__DIR__ . '/config/Routes.php');
+    foreach ($routes as $route) {
+        $r->addRoute($route[0], $route[1], $route[2]);
+    }
+};
+
+$dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 switch ($routeInfo[0]) {
