@@ -1,3 +1,3 @@
-<?php
+<?php declare(strict_types = 1); 
 
-echo " Hello World from HelloFresh";
+require __DIR__ . '/../src/Bootstrap.php';
