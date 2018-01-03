@@ -1,0 +1,21 @@
+{
+    "name": "REST API Test",
+    "description": "REST API Test for Recepie API's",
+    "keywords": ["REST API", "Core PHP", "Unit Test"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ramesh Mhetre",
+            "email": "mhetreramesh@gmail.com",
+            "role": "Creator / Main Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Example\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+docker run --rm -ti -v $(pwd):/app -v $HOME/.composer:/home/.composer -u $(id -u):$(id -g) lucor/composer --ansi update --ignore-platform-reqs
