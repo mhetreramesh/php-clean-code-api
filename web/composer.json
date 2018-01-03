@@ -14,7 +14,8 @@
         "php": ">=7.1",
         "filp/whoops": "~2.1",
         "patricklouys/http": "~1.4",
-        "nikic/fast-route": "~1.2"
+        "nikic/fast-route": "~1.2",
+        "rdlowrey/auryn": "*"
     },
     "autoload": {
         "psr-4": {
