@@ -9,11 +9,12 @@ class BaseApiController
 {
     protected $request;
     protected $response;
+    protected $fractal;
 
     public function __construct($request, $response)
     {
         $this->request = $request;
         $this->response = $response;
-        $fractal = new Manager();
+        $this->fractal = new Manager();
     }
 }

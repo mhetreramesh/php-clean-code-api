@@ -2,5 +2,5 @@
 
 return [
     ['GET', '/', ['RestApi\Controllers\HomeController', 'show']],
-    ['GET', '/recipes', ['RestApi\Controllers\API\RecipesController', 'show']]
+    ['GET', '/recipes', ['RestApi\Controllers\API\RecipesController', 'index']]
 ];
