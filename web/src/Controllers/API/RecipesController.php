@@ -1,19 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace RestApi\Controllers;
+namespace RestApi\Controllers\API;
 
 use Http\Request;
 use Http\Response;
 
-class RecipesController
+class RecipesController extends BaseApiController
 {
-    private $request;
-    private $response;
-
     public function __construct(Request $request, Response $response)
     {
-        $this->request = $request;
-        $this->response = $response;
+        parent::__construct($request, $response);
     }
 
     public function show()

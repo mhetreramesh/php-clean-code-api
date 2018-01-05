@@ -15,7 +15,8 @@
         "filp/whoops": "~2.1",
         "patricklouys/http": "~1.4",
         "nikic/fast-route": "~1.2",
-        "rdlowrey/auryn": "*"
+        "rdlowrey/auryn": "*",
+        "league/fractal": "*"
     },
     "autoload": {
         "psr-4": {
