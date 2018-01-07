@@ -17,10 +17,11 @@ class RecipesController extends BaseApiController
 
     public function index()
     {
+            /*
+        
         try{
             R::setup("pgsql:dbname=hellofresh;host=postgres", "hellofresh", "hellofresh");
             
-            /*
             $recipe = R::dispense('recipes');
             $recipe->name = 'Jaeger';
             $recipe->prep_time = '3 Hours';
@@ -32,7 +33,6 @@ class RecipesController extends BaseApiController
             $new->name = 'Ramesh Jaeger new';
             $id = R::store( $new );
             print_r($id);
-            */ 
             $new = R::findAll('recipes');
 
             print_r($new[2]->name);
@@ -41,6 +41,7 @@ class RecipesController extends BaseApiController
             $trace = $e->getTrace();
             echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine().' called from '.$trace[0]['file'].' on line '.$trace[0]['line'];
         }
+            */         
         $recipes = [
             [
                 'id' => '1',
