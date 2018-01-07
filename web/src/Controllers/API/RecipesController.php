@@ -4,6 +4,8 @@ namespace RestApi\Controllers\API;
 
 use Http\Request;
 use Http\Response;
+use PDO;
+use RedBeanPHP\R as R;
 use League\Fractal\Resource\Collection;
 
 class RecipesController extends BaseApiController
@@ -15,6 +17,30 @@ class RecipesController extends BaseApiController
 
     public function index()
     {
+        try{
+            R::setup("pgsql:dbname=hellofresh;host=postgres", "hellofresh", "hellofresh");
+            
+            /*
+            $recipe = R::dispense('recipes');
+            $recipe->name = 'Jaeger';
+            $recipe->prep_time = '3 Hours';
+            $recipe->difficulty = 3;
+            $recipe->vegetarian = 0;
+            $id = R::store( $recipe );
+
+            $new = R::load('recipes', 2);
+            $new->name = 'Ramesh Jaeger new';
+            $id = R::store( $new );
+            print_r($id);
+            */ 
+            $new = R::findAll('recipes');
+
+            print_r($new[2]->name);
+            die;
+        } catch(Throwable $e) {
+            $trace = $e->getTrace();
+            echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine().' called from '.$trace[0]['file'].' on line '.$trace[0]['line'];
+        }
         $recipes = [
             [
                 'id' => '1',

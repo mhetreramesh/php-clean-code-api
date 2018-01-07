@@ -16,7 +16,9 @@
         "patricklouys/http": "~1.4",
         "nikic/fast-route": "~1.2",
         "rdlowrey/auryn": "*",
-        "league/fractal": "*"
+        "league/fractal": "*",
+        "davedevelopment/phpmig": "*",
+        "gabordemooij/redbean": "dev-master"
     },
     "autoload": {
         "psr-4": {
