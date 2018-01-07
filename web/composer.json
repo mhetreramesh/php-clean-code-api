@@ -18,7 +18,8 @@
         "rdlowrey/auryn": "*",
         "league/fractal": "*",
         "davedevelopment/phpmig": "*",
-        "gabordemooij/redbean": "dev-master"
+        "gabordemooij/redbean": "dev-master",
+        "phpunit/phpunit": "*"
     },
     "autoload": {
         "psr-4": {
@@ -26,5 +27,8 @@
             "Core\\": "core/",
             "Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
