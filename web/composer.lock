@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e6cffd69f593ec70e6c6e14079a00cb",
+    "content-hash": "370f3fd3857d6b06013a1c24f7a4be7a",
     "packages": [
         {
             "name": "davedevelopment/phpmig",

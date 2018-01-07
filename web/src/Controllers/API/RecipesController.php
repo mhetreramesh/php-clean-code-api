@@ -7,6 +7,8 @@ use Http\Response;
 use PDO;
 use RedBeanPHP\R as R;
 use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
+use Core\Factory\GuestFactory;
 
 class RecipesController extends BaseApiController
 {
@@ -17,8 +19,9 @@ class RecipesController extends BaseApiController
 
     public function index()
     {
+        $recipes = GuestFactory::getRecipes()->execute();
+        //var_dump($recipes); die;
             /*
-        
         try{
             R::setup("pgsql:dbname=hellofresh;host=postgres", "hellofresh", "hellofresh");
             
@@ -41,31 +44,14 @@ class RecipesController extends BaseApiController
             $trace = $e->getTrace();
             echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine().' called from '.$trace[0]['file'].' on line '.$trace[0]['line'];
         }
-            */         
-        $recipes = [
-            [
-                'id' => '1',
-                'name' => 'Jaeger Schnitzel',
-                'prep_time' => '3 Hours',
-                'difficulty' => 3,
-                'vegetarian' => 0,
-            ],
-            [
-                'id' => '2',
-                'name' => 'Bee Sting Cake',
-                'prep_time' => '45 Mins',
-                'difficulty' => 1,
-                'vegetarian' => 1,
-            ]
-        ];
-
-        $resource = new Collection($recipes, function(array $recipes) {
+*/
+        $resource = new Collection($recipes, function($recipes) {
             return [
-                'id'      => (int) $recipes['id'],
-                'name'   => $recipes['name'],
-                'prep_time' => $recipes['prep_time'],
-                'difficulty' => (int) $recipes['difficulty'],
-                'vegetarian' => (bool) $recipes['vegetarian'],
+                'id'      => (int) $recipes->id,
+                'name'   => $recipes->name,
+                'prep_time' => $recipes->prep_time,
+                'difficulty' => (int) $recipes->difficulty,
+                'vegetarian' => (bool) $recipes->vegetarian,
                 'ratings'  => [],
                 'links'   => [
                     [
@@ -78,14 +64,29 @@ class RecipesController extends BaseApiController
         
         $data = $this->fractal->createData($resource)->toJson();
         $this->response->setContent($data);
-        $response = $this->response->getContent();
-        //print_r($response);
     }
 
-    public function show()
+    public function show($data)
     {
-        $content = '<h1>Hello World</h1>';
-        $content .= 'Hello ' . $this->request->getParameter('name', 'stranger');
-        $this->response->setContent($content);
+        $recipe = GuestFactory::getRecipe()->execute($data['id']);
+        $resource = new Item($recipe, function($recipe) {
+            return [
+                'id'      => (int) $recipe->id,
+                'name'   => $recipe->name,
+                'prep_time' => $recipe->prep_time,
+                'difficulty' => (int) $recipe->difficulty,
+                'vegetarian' => (bool) $recipe->vegetarian,
+                'ratings'  => [],
+                'links'   => [
+                    [
+                        'rel' => 'self',
+                        'uri' => '/recipes/'.$recipe['id'],
+                    ]
+                ]
+            ];
+        });
+        
+        $data = $this->fractal->createData($resource)->toJson();
+        $this->response->setContent($data);
     }
 }
