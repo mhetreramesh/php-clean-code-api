@@ -23,7 +23,8 @@
     "autoload": {
         "psr-4": {
             "RestApi\\": "src/",
-            "Core\\": "core/"
+            "Core\\": "core/",
+            "Tests\\": "tests/"
         }
     }
 }

@@ -15,6 +15,11 @@ class GetRecipeUsecase
 
     public function execute($id)
     {
-        return $this->recipeRepository->find('recipes', $id);
+        $recepie = $this->recipeRepository->find('recipes', $id);
+        if($recepie->id !== $id) {
+            //ToDo: Need to return error with proper error handler service
+            return [];
+        }
+        return $recepie;
     }
 }

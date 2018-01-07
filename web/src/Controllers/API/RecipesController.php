@@ -9,6 +9,7 @@ use RedBeanPHP\R as R;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use Core\Factory\GuestFactory;
+use RestApi\Transformers\RecipeTransformer;
 
 class RecipesController extends BaseApiController
 {
@@ -45,22 +46,7 @@ class RecipesController extends BaseApiController
             echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine().' called from '.$trace[0]['file'].' on line '.$trace[0]['line'];
         }
 */
-        $resource = new Collection($recipes, function($recipes) {
-            return [
-                'id'      => (int) $recipes->id,
-                'name'   => $recipes->name,
-                'prep_time' => $recipes->prep_time,
-                'difficulty' => (int) $recipes->difficulty,
-                'vegetarian' => (bool) $recipes->vegetarian,
-                'ratings'  => [],
-                'links'   => [
-                    [
-                        'rel' => 'self',
-                        'uri' => '/recipes/'.$recipes['id'],
-                    ]
-                ]
-            ];
-        });
+        $resource = new Collection($recipes, new RecipeTransformer);
         
         $data = $this->fractal->createData($resource)->toJson();
         $this->response->setContent($data);
@@ -69,24 +55,28 @@ class RecipesController extends BaseApiController
     public function show($data)
     {
         $recipe = GuestFactory::getRecipe()->execute($data['id']);
-        $resource = new Item($recipe, function($recipe) {
-            return [
-                'id'      => (int) $recipe->id,
-                'name'   => $recipe->name,
-                'prep_time' => $recipe->prep_time,
-                'difficulty' => (int) $recipe->difficulty,
-                'vegetarian' => (bool) $recipe->vegetarian,
-                'ratings'  => [],
-                'links'   => [
-                    [
-                        'rel' => 'self',
-                        'uri' => '/recipes/'.$recipe['id'],
-                    ]
-                ]
-            ];
-        });
+        if(empty($recipe)) {
+            $this->response->setStatusCode(404, 'Requested recipe not found');
+            return;
+        }
+        $resource = new Item($recipe, new RecipeTransformer);
         
         $data = $this->fractal->createData($resource)->toJson();
         $this->response->setContent($data);
+    }
+
+    public function create()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+        
     }
 }
