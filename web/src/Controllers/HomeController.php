@@ -5,7 +5,7 @@ namespace RestApi\Controllers;
 use Http\Request;
 use Http\Response;
 
-class RecipesController
+class HomeController
 {
     private $request;
     private $response;
