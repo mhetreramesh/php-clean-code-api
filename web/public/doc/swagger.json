@@ -151,14 +151,22 @@
                 "tags": [
                     "recipes"
                 ],
-                "summary": "Put recipes API",
-                "description": "Put recipes API",
-                "operationId": "put recipe",
+                "summary": "Update recipe",
+                "description": "Update recipe data",
+                "operationId": "putrecipe",
                 "produces": [
                     "application/xml",
                     "application/json"
                 ],
                 "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of recipe to return",
+                        "required":true,
+                        "type":"integer",
+                        "format":"int64"
+                    },
                     {
                         "in": "body",
                         "name": "body",
@@ -185,12 +193,22 @@
                 "tags": [
                     "recipes"
                 ],
-                "summary": "Delete Recipes API",
-                "description": "",
-                "operationId": "delete recipe",
+                "summary": "Delete Recipes",
+                "description": "Hard delete of recipe",
+                "operationId": "deleteRecipe",
                 "produces": [
                     "application/xml",
                     "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of recipe to return",
+                        "required":true,
+                        "type":"integer",
+                        "format":"int64"
+                    }
                 ],
                 "responses": {
                     "200": {
