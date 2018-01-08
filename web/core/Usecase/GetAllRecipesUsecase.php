@@ -13,8 +13,8 @@ class GetAllRecipesUsecase
         $this->recipeRepository = $recipeRepository;
     }
 
-    public function execute()
+    public function execute($query = NULL, $order = NULL, $orderDirection = 'DESC', $limit = null, $offset = null)
     {
-        return $this->recipeRepository->findAll('recipes');
+        return $this->recipeRepository->findBy('recipes', $query, $order, $orderDirection, $limit, $offset);
     }
 }

@@ -4,7 +4,7 @@ namespace Core\Usecase;
 
 use Core\Adapter\RecipeRepositoryInterface;
 
-class GetRecipeUsecase
+class DeleteRecipeUsecase
 {
     protected $recipeRepository;
 
@@ -20,6 +20,6 @@ class GetRecipeUsecase
             //ToDo: Need to return error with proper error handler service
             return [];
         }
-        return $recipe;
+        return $this->recipeRepository->remove($recipe);
     }
 }

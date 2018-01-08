@@ -4,7 +4,7 @@ namespace Core\Usecase;
 
 use Core\Adapter\RecipeRepositoryInterface;
 
-class GetRecipeUsecase
+class UpdateRecipeUsecase
 {
     protected $recipeRepository;
 
@@ -13,13 +13,13 @@ class GetRecipeUsecase
         $this->recipeRepository = $recipeRepository;
     }
 
-    public function execute($id)
+    public function execute($id, $data)
     {
-        $recipe = $this->recipeRepository->find('recipes', $id);
-        if($recipe->id !== $id) {
+        $recepie = $this->recipeRepository->find('recipes', $id);
+        if($recepie->id !== $id) {
             //ToDo: Need to return error with proper error handler service
             return [];
         }
-        return $recipe;
+        return $this->recipeRepository->update($recepie, $data);
     }
 }
