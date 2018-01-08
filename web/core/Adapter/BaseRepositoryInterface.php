@@ -4,11 +4,11 @@ namespace Core\Adapter;
 
 interface BaseRepositoryInterface
 {
-    public function findOneBy($entity, array $conditions);
-    public function find($entity, $rowId);
-    public function findAll($entity);
-    public function findBy($entity, $conditions = array(), $order = array(), $limit = null, $offset = null);
-    public function save($entity);
-    public function remove($entity);
-    public function findAllPaginated($entity, $conditions = array(), $order = array(), $limit = null, $offset = null);
+    public function findOneBy($table, array $conditions);
+    public function find($table, $rowId);
+    public function findAll($table);
+    public function findBy($table, $conditions = array(), $order = array(), $limit = null, $offset = null);
+    public function save($table, $data);
+    public function remove($table);
+    public function findAllPaginated($table, $conditions = array(), $order = array(), $limit = null, $offset = null);
 }

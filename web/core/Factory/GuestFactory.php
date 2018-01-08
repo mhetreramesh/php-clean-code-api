@@ -6,6 +6,10 @@ use Core\Usecase\GetAllRecipesUsecase;
 use Core\Usecase\GetRecipeUsecase;
 use Core\Repository\RecipeRepository;
 
+/*
+*   This is the factory to give access to all usecases who doesn't require athenticated
+*/
+
 class GuestFactory
 {
     public static function getRecipes()

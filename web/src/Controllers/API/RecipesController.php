@@ -9,6 +9,7 @@ use RedBeanPHP\R as R;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use Core\Factory\GuestFactory;
+use Core\Factory\UserFactory;
 use RestApi\Transformers\RecipeTransformer;
 
 class RecipesController extends BaseApiController
@@ -67,7 +68,14 @@ class RecipesController extends BaseApiController
 
     public function create()
     {
-
+        $data = [
+            'name' => $this->request->getParameter('name', 'Test Recipe'),
+            'prep_time' => $this->request->getParameter('prep_time', '1 Hour'),
+            'difficulty' => $this->request->getParameter('difficulty', 1),
+            'vegetarian' => $this->request->getParameter('vegetarian', 0)
+        ];
+        $recipe = UserFactory::createRecipe()->execute($data);
+        print_r($recipe);
     }
 
     public function update()
@@ -77,6 +85,6 @@ class RecipesController extends BaseApiController
 
     public function delete()
     {
-        
+
     }
 }

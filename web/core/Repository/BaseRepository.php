@@ -16,37 +16,42 @@ class BaseRepository implements BaseRepositoryInterface
         R::setup("pgsql:dbname=hellofresh;host=postgres", "hellofresh", "hellofresh");
     }
 
-    public function findOneBy($entity, array $conditions)
+    public function findOneBy($table, array $conditions)
     {
         return [];
     }
 
-    public function find($entity, $rowId)
+    public function find($table, $rowId)
     {
-        return R::load($entity, $rowId);
+        return R::load($table, $rowId);
     }
 
-    public function findAll($entity)
+    public function findAll($table)
     {
-        return R::findAll($entity);
+        return R::findAll($table);
     }
 
-    public function findBy($entity, $conditions = array(), $order = array(), $limit = null, $offset = null)
-    {
-        return [];
-    }
-
-    public function save($entity)
+    public function findBy($table, $conditions = array(), $order = array(), $limit = null, $offset = null)
     {
         return [];
     }
 
-    public function remove($entity)
+    public function save($table, $data)
+    {
+        $entity = R::dispense($table);
+        foreach($data as $key => $value) {
+            $entity->{$key} = $value;
+        }
+        $lastId = R::store($entity);
+        return $lastId;
+    }
+
+    public function remove($table)
     {
         return [];
     }
 
-    public function findAllPaginated($entity, $conditions = array(), $order = array(), $limit = 100, $offset = 0)
+    public function findAllPaginated($table, $conditions = array(), $order = array(), $limit = 100, $offset = 0)
     {
         return  [];
     }
