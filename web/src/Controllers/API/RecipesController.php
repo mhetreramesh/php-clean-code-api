@@ -23,7 +23,7 @@ class RecipesController extends BaseApiController
         $query = $this->request->getParameter('search', NULL);
         $orderBy = $this->request->getParameter('orderBy', NULL);
         $orderDirection = $this->request->getParameter('orderDirection', 'DESC');
-        $limit = $this->request->getParameter('limit', 5);
+        $limit = $this->request->getParameter('limit', 20);
         $offset = $this->request->getParameter('offset', 0);
 
         $recipes = GuestFactory::getRecipes()->execute($query, $orderBy, $orderDirection, $limit, $offset);

@@ -3,19 +3,18 @@
 namespace Tests\Usecase;
 
 use Core\Adapter\RecipeRepositoryInterface;
-use Core\Usecase\GetRecipeUsecase;
+use Core\Usecase\UpdateRecipeUsecase;
 use PHPUnit\Framework\TestCase;
 use Core\Repository\RecipeRepository;
 
-class GetRecipeUsecaseTest extends TestCase
+class UpdateRecipeUsecaseTest extends TestCase
 {
-    public function testGetRecipeUsecase()
+    public function testUpdateRecipeUsecase()
     {
-        $stub = $this->createMock(GetRecipeUsecase::class);
+        $stub = $this->createMock(UpdateRecipeUsecase::class);
         $stub->method('execute')
              ->willReturn([]);
-        $this->assertEquals([], $stub->execute(1));
-
+        $this->assertEquals([], $stub->execute(1, []));
     }
 }
 
