@@ -1,0 +1,266 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Hellofresh REST API Test",
+        "version": "1.0.0",
+        "title": "Hellofresh REST API"
+    },
+    "host": "localhost:82",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "recipes",
+            "description": "Recipes CRUD API"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/recipes": {
+            "get": {
+                "tags": [
+                    "recipes"
+                ],
+                "summary": "Get all recpies",
+                "description": "Search & returns all recpies",
+                "operationId": "getAllRecipes",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name":"search",
+                        "in":"query",
+                        "description":"Search query",
+                        "required":false,
+                        "type":"string"
+                    },
+                    {
+                        "name":"orderBy",
+                        "in":"query",
+                        "description":"Order by",
+                        "required":false,
+                        "type":"string"
+                    },
+                    {
+                        "name":"orderDirection",
+                        "in":"query",
+                        "description":"Order By direction",
+                        "required":false,
+                        "type":"string"
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "description":"Limit for the data",
+                        "required":false,
+                        "type":"string"
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "description":"Query Offset",
+                        "required":false,
+                        "type":"string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "recipes"
+                ],
+                "summary": "Create new recipes",
+                "description": "Post recipes API",
+                "operationId": "postRecipe",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Create recipe",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/recipe"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/recipe"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid recipe"
+                    }
+                }
+            }
+        },
+        "/recipes/{id}": {
+            "get": {
+                "tags": [
+                    "recipes"
+                ],
+                "summary": "Find recipe by id",
+                "description": "Returns recpie by id",
+                "operationId": "getRecipe",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of recipe to return",
+                        "required":true,
+                        "type":"integer",
+                        "format":"int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "recipes"
+                ],
+                "summary": "Put recipes API",
+                "description": "Put recipes API",
+                "operationId": "put recipe",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "recipe placed for purchasing the pet",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/recipe"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/recipe"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid recipe"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "recipes"
+                ],
+                "summary": "Delete Recipes API",
+                "description": "",
+                "operationId": "delete recipe",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/recipe"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid recipe"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "recipe": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "prep_time": {
+                    "type": "string"
+                },
+                "difficulty": {
+                    "type": "string"
+                },
+                "vegetarian": {
+                    "type": "int64",
+                    "description": "recipe Status",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "complete": {
+                    "type": "boolean",
+                    "default": false
+                }
+            },
+            "xml": {
+                "name": "recipe"
+            }
+        },
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
