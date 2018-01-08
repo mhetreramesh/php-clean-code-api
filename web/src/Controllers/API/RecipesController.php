@@ -7,6 +7,9 @@ use Http\Response;
 use PDO;
 use RedBeanPHP\R as R;
 use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
+use Core\Factory\GuestFactory;
+use RestApi\Transformers\RecipeTransformer;
 
 class RecipesController extends BaseApiController
 {
@@ -17,8 +20,9 @@ class RecipesController extends BaseApiController
 
     public function index()
     {
+        $recipes = GuestFactory::getRecipes()->execute();
+        //var_dump($recipes); die;
             /*
-        
         try{
             R::setup("pgsql:dbname=hellofresh;host=postgres", "hellofresh", "hellofresh");
             
@@ -41,51 +45,38 @@ class RecipesController extends BaseApiController
             $trace = $e->getTrace();
             echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine().' called from '.$trace[0]['file'].' on line '.$trace[0]['line'];
         }
-            */         
-        $recipes = [
-            [
-                'id' => '1',
-                'name' => 'Jaeger Schnitzel',
-                'prep_time' => '3 Hours',
-                'difficulty' => 3,
-                'vegetarian' => 0,
-            ],
-            [
-                'id' => '2',
-                'name' => 'Bee Sting Cake',
-                'prep_time' => '45 Mins',
-                'difficulty' => 1,
-                'vegetarian' => 1,
-            ]
-        ];
-
-        $resource = new Collection($recipes, function(array $recipes) {
-            return [
-                'id'      => (int) $recipes['id'],
-                'name'   => $recipes['name'],
-                'prep_time' => $recipes['prep_time'],
-                'difficulty' => (int) $recipes['difficulty'],
-                'vegetarian' => (bool) $recipes['vegetarian'],
-                'ratings'  => [],
-                'links'   => [
-                    [
-                        'rel' => 'self',
-                        'uri' => '/recipes/'.$recipes['id'],
-                    ]
-                ]
-            ];
-        });
+*/
+        $resource = new Collection($recipes, new RecipeTransformer);
         
         $data = $this->fractal->createData($resource)->toJson();
         $this->response->setContent($data);
-        $response = $this->response->getContent();
-        //print_r($response);
     }
 
-    public function show()
+    public function show($data)
     {
-        $content = '<h1>Hello World</h1>';
-        $content .= 'Hello ' . $this->request->getParameter('name', 'stranger');
-        $this->response->setContent($content);
+        $recipe = GuestFactory::getRecipe()->execute($data['id']);
+        if(empty($recipe)) {
+            $this->response->setStatusCode(404, 'Requested recipe not found');
+            return;
+        }
+        $resource = new Item($recipe, new RecipeTransformer);
+        
+        $data = $this->fractal->createData($resource)->toJson();
+        $this->response->setContent($data);
+    }
+
+    public function create()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+        
     }
 }

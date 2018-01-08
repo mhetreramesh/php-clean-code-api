@@ -4,6 +4,7 @@ use \Phpmig\Adapter;
 
 $container = new ArrayObject();
 
+//ToDo: Get this DB credentials from .env file using env package
 $dbh = new PDO("pgsql:dbname=hellofresh;host=postgres", "hellofresh", "hellofresh");
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $container['db'] = $dbh;

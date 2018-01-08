@@ -1,6 +1,6 @@
 {
-    "name": "REST API Test",
-    "description": "REST API Test for Recepie API's",
+    "name": "HelloFresh REST API Test",
+    "description": "HelloFresh REST API Test for Recepie API's",
     "keywords": ["REST API", "Core PHP", "Unit Test"],
     "license": "MIT",
     "authors": [
@@ -18,11 +18,17 @@
         "rdlowrey/auryn": "*",
         "league/fractal": "*",
         "davedevelopment/phpmig": "*",
-        "gabordemooij/redbean": "dev-master"
+        "gabordemooij/redbean": "dev-master",
+        "phpunit/phpunit": "*"
     },
     "autoload": {
         "psr-4": {
-            "RestApi\\": "src/"
+            "RestApi\\": "src/",
+            "Core\\": "core/",
+            "Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
