@@ -28,12 +28,30 @@ class BaseRepository implements BaseRepositoryInterface
 
     public function findAll($table)
     {
-        return R::findAll($table);
+        return R::findAll($table, ' name LIKE ? ORDER BY id DESC LIMIT 5', ['%Jae%'] );
     }
 
-    public function findBy($table, $conditions = array(), $order = array(), $limit = null, $offset = null)
+    public function findBy($table, $query = NULL, $order = NULL, $orderDirection = 'DESC', $limit = null, $offset = null)
     {
-        return [];
+        $sql = '';
+        $params = [];
+        if($query) {
+            $sql .= ' name LIKE ?';
+            $params[] = '%'.$query.'%';
+        }
+        if($order) {
+            $sql .= ' ORDER BY ? '.$orderDirection;
+            $params[] = $order;
+        }
+        if($offset) {
+            $sql .= ' OFFSET ?';
+            $params[] = $offset;
+        }
+        if($limit) {
+            $sql .= ' LIMIT ?';
+            $params[] = $limit;
+        }
+        return R::findAll($table, $sql, $params);
     }
 
     public function save($table, $data)
@@ -59,11 +77,6 @@ class BaseRepository implements BaseRepositoryInterface
     public function remove($entity)
     {
         R::trash($entity);
-    }
-
-    public function findAllPaginated($table, $conditions = array(), $order = array(), $limit = 100, $offset = 0)
-    {
-        return  [];
     }
 
     public function beginTransaction()
