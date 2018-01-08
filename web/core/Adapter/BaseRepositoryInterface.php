@@ -9,6 +9,7 @@ interface BaseRepositoryInterface
     public function findAll($table);
     public function findBy($table, $conditions = array(), $order = array(), $limit = null, $offset = null);
     public function save($table, $data);
-    public function remove($table);
+    public function update($entiry, $data);
+    public function remove($entity);
     public function findAllPaginated($table, $conditions = array(), $order = array(), $limit = null, $offset = null);
 }

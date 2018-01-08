@@ -3,6 +3,8 @@
 namespace Core\Factory;
 
 use Core\Usecase\CreateRecipeUsecase;
+use Core\Usecase\UpdateRecipeUsecase;
+use Core\Usecase\DeleteRecipeUsecase;
 use Core\Repository\RecipeRepository;
 
 /*
@@ -14,6 +16,20 @@ class UserFactory
     public static function createRecipe()
     {
         return new CreateRecipeUsecase(
+            new RecipeRepository()
+        );
+    }
+
+    public static function updateRecipe()
+    {
+        return new UpdateRecipeUsecase(
+            new RecipeRepository()
+        );
+    }
+
+    public static function deleteRecipe()
+    {
+        return new DeleteRecipeUsecase(
             new RecipeRepository()
         );
     }

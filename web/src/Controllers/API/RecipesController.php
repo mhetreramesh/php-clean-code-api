@@ -2,7 +2,6 @@
 
 namespace RestApi\Controllers\API;
 
-use Http\Request;
 use Http\Response;
 use PDO;
 use RedBeanPHP\R as R;
@@ -14,39 +13,14 @@ use RestApi\Transformers\RecipeTransformer;
 
 class RecipesController extends BaseApiController
 {
-    public function __construct(Request $request, Response $response)
+    public function __construct(Response $response)
     {
-        parent::__construct($request, $response);
+        parent::__construct($response);
     }
 
     public function index()
     {
         $recipes = GuestFactory::getRecipes()->execute();
-        //var_dump($recipes); die;
-            /*
-        try{
-            R::setup("pgsql:dbname=hellofresh;host=postgres", "hellofresh", "hellofresh");
-            
-            $recipe = R::dispense('recipes');
-            $recipe->name = 'Jaeger';
-            $recipe->prep_time = '3 Hours';
-            $recipe->difficulty = 3;
-            $recipe->vegetarian = 0;
-            $id = R::store( $recipe );
-
-            $new = R::load('recipes', 2);
-            $new->name = 'Ramesh Jaeger new';
-            $id = R::store( $new );
-            print_r($id);
-            $new = R::findAll('recipes');
-
-            print_r($new[2]->name);
-            die;
-        } catch(Throwable $e) {
-            $trace = $e->getTrace();
-            echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine().' called from '.$trace[0]['file'].' on line '.$trace[0]['line'];
-        }
-*/
         $resource = new Collection($recipes, new RecipeTransformer);
         
         $data = $this->fractal->createData($resource)->toJson();
@@ -75,16 +49,31 @@ class RecipesController extends BaseApiController
             'vegetarian' => $this->request->getParameter('vegetarian', 0)
         ];
         $recipe = UserFactory::createRecipe()->execute($data);
-        print_r($recipe);
+
+        $resource = new Item($recipe, new RecipeTransformer);
+        $data = $this->fractal->createData($resource)->toJson();
+        $this->response->setContent($data);
     }
 
-    public function update()
+    public function update($input)
     {
+        $data = [
+            'name' => $this->request->getParameter('name'),
+            'prep_time' => $this->request->getParameter('prep_time'),
+            'difficulty' => $this->request->getParameter('difficulty'),
+            'vegetarian' => $this->request->getParameter('vegetarian')
+        ];
+        $recipe = UserFactory::updateRecipe()->execute($input['id'], $data);
 
+        $resource = new Item($recipe, new RecipeTransformer);
+        $data = $this->fractal->createData($resource)->toJson();
+        $this->response->setContent($data);
     }
 
     public function delete()
     {
-
+        UserFactory::deleteRecipe()->execute($data);
+        $data = [];
+        $this->response->setContent($data);
     }
 }

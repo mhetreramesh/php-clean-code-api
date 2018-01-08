@@ -46,9 +46,19 @@ class BaseRepository implements BaseRepositoryInterface
         return $lastId;
     }
 
-    public function remove($table)
+    public function update($entity, $data)
     {
-        return [];
+        foreach($data as $key => $value) {
+            if($key && $value) continue;
+            $entity->{$key} = $value;
+        }
+        $lastId = R::store($entity);
+        return $lastId;
+    }
+
+    public function remove($entity)
+    {
+        R::trash($entity);
     }
 
     public function findAllPaginated($table, $conditions = array(), $order = array(), $limit = 100, $offset = 0)
