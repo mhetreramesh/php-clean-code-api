@@ -1,5 +1,12 @@
 # HelloFresh Senior Backend Developer Test
 
+## Changes made to core
+- Since I had some other serivce running on `80` port, I've made chage in `docker-compose.yml` to run nginx on `82` port, so the application will be accessible on `http://localhost:82` port. You refer it on develop branch.
+- **Composer Install** - If you have composer installed on your local you can directly do `composer install` else can use my docker image script `cd web && bash composer_update.sh`.
+- **DB Migrations** - 
+- **Unit Test** - To Run Unit tests use `composer test` or use `bash phpunit.sh`
+
+
 ## Functionalities covered
 
 - **Recipes** CURD REST API
