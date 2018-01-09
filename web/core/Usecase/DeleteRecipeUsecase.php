@@ -16,7 +16,7 @@ class DeleteRecipeUsecase
     public function execute($id)
     {
         $recipe = $this->recipeRepository->find('recipes', $id);
-        if($recipe->id !== $id) {
+        if(empty($recipe) || $recipe->id !== $id) {
             //ToDo: Need to return error with proper error handler service
             return [];
         }

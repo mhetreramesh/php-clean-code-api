@@ -15,7 +15,33 @@ class GetAllRecipesUsecaseTest extends TestCase
         $stub->method('execute')
              ->willReturn([]);
         $this->assertEquals([], $stub->execute());
+    }
 
+    public function testGetAllRecipesUsecaseFails()
+    {
+        $stub = $this->createMock(RecipeRepository::class);
+        $stub->method('findBy')
+             ->willReturn($this->getRecipes());
+        $result = (new GetAllRecipesUsecase($stub))->execute();
+        $this->assertNotEquals([], $result);
+    }
+
+    public function testGetAllRecipesUsecaseSuccess()
+    {
+        
+        $stub = $this->createMock(RecipeRepository::class);
+        $stub->method('findBy')
+             ->willReturn($this->getRecipes());
+        $result = (new GetAllRecipesUsecase($stub))->execute();
+        $this->assertEquals($this->getRecipes(), $result);
+    }
+
+    private function getRecipes()
+    {
+        $recipe = new \stdClass;
+        $recipe->id = 1;
+        $recipe->name = 'test recipe';
+        return [$recipe];
     }
 }
 
