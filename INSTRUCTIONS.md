@@ -1,11 +1,29 @@
 # HelloFresh Senior Backend Developer Test
 
-## Changes made to core
-- Since I had some other serivce running on `80` port, I've made chage in `docker-compose.yml` to run nginx on `82` port, so the application will be accessible on `http://localhost:82` port. You refer it on develop branch.
-- **Composer Install** - If you have composer installed on your local you can directly do `composer install` else can use my docker image script `cd web && bash composer_update.sh`.
-- **DB Migrations** - 
-- **Unit Test** - To Run Unit tests use `composer test` or use `bash phpunit.sh`
+*While creating this assignment, my focus was on doing things the best possible way with given constraints in mind. So, I really haven't foused on completing assignment by number of functionalities but with the best possible approach, tools & plugins availble.*
 
+*The most interesting part for me was defining [clean code architecture](#clean-code-architecture)
+
+### *All changes now merged in develop branch now*
+
+## Basic Details & instructions
+
+- Since I had some other serivce running on `80` port, I've made chage in `docker-compose.yml` to run nginx on `82` port, so the application will be accessible on `http://localhost:82` url. You can find it on develop branch.
+- **Composer Install** - If you have composer installed on your local you can directly do `composer install` else can use my docker image script `cd web && bash composer_update.sh`.
+- **DB Migrations** - Short command `bash migrate.sh` or ssh into php container & `run phpmig migrate` command
+- **Unit Test** - To Run Unit tests use `composer test` or use `bash phpunit.sh`
+- **API DOC** - You can access swagger API doc on `http://localhost:82/doc/index.html` URL
+
+## Clean code architecture
+
+- I've followed [Clean Code Architecture](https://github.com/jupeter/clean-code-php) by [Robert C. Martin](https://en.wikipedia.org/wiki/Robert_C._Martin)
+- Bellow are few concepts I've focused & followed while building this architecture
+    - SOLID Principles
+    - DRY(Don't repeat yourself) principle
+    - Factory Desgin Pattern
+    - Adapter Pattern
+    - Mediator Pattern
+- The main benefit of having this kind of architecture is to keep your core business logic testable
 
 ## Functionalities covered
 
@@ -15,7 +33,7 @@
 - Limit & paginate results on **GET Recipes** API
 - **API key** based authentication for closed API's
 - Documented API's using [Swagger](https://swagger.io/) 
-- Written Unit Tests using **PHP Unit**
+- Few Unit Tests using **PHP Unit**
 
 ## Resources/plugins used
 
@@ -27,3 +45,6 @@
 - [davedevelopment/phpmig](https://packagist.org/packages/davedevelopment/phpmig) - Simple database migration system in PHP
 - [gabordemooij/redbean](https://packagist.org/packages/gabordemooij/redbean) - A micro ORM for PHP
 - [phpunit/phpunit](https://packagist.org/packages/phpunit/phpunit) - Testing framework
+
+## Improvements needed
+- Need to added rating API, but now it can be done like above

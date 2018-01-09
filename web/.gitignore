@@ -2,3 +2,4 @@
 /.idea
 /.DS_Store
 /public/.DS_Store
+/migrations/.migrations.log
