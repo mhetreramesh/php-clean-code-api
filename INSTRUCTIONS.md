@@ -2,7 +2,7 @@
 
 *While creating this assignment, my focus was on doing things the best possible way with given constraints in mind. So, I really haven't foused on completing assignment by number of functionalities but with the best possible approach, tools & plugins availble.*
 
-*The most interesting part for me was defining [clean code architecture](#clean-code-architecture)
+*The most interesting part for me was defining [clean code architecture](#clean-code-architecture)*
 
 ### *All changes now merged in develop branch now*
 
