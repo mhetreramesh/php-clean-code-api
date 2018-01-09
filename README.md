@@ -1,5 +1,7 @@
 # HelloFresh Senior Backend Developer Test
 
+***Developer Note** - I've added [INSTRUCTIONS](INSTRUCTIONS.md) for the complete information about project*
+
 Hello and thanks for taking the time to try this out.
 
 The goal of this test is to assert (to some degree) your coding and architectural skills. You're given a simple problem so you can focus on showcasing development techniques. We encourage you to overengineer the solution a little to show off what you can do - assume you're building a production-ready application that other developers will need to work on and add to over time.
