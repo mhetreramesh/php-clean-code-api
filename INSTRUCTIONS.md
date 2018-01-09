@@ -16,13 +16,13 @@
 
 ## Clean code architecture
 
-- I've followed [Clean Code Architecture](https://github.com/jupeter/clean-code-php) by [Robert C. Martin](https://en.wikipedia.org/wiki/Robert_C._Martin)
+- I've followed [Clean Code Architecture in PHP](https://leanpub.com/cleanphp) by [Kristopher Wilson](https://leanpub.com/u/kristopherwilson). (A [free](https://phutai.me/wp-content/uploads/2016/10/The-Clean-Architecture-in-PHP-Kristopher-Wilson.pdf) version)
 - Bellow are few concepts I've focused & followed while building this architecture
     - SOLID Principles
-    - DRY(Don't repeat yourself) principle
-    - Factory Desgin Pattern
+    - The Onion Architecture
+    - Factory Pattern & Static Factories
     - Adapter Pattern
-    - Mediator Pattern
+    - Repository Pattern
 - The main benefit of having this kind of architecture is to keep your core business logic testable
 
 ## Functionalities covered
@@ -47,4 +47,5 @@
 - [phpunit/phpunit](https://packagist.org/packages/phpunit/phpunit) - Testing framework
 
 ## Improvements needed
-- Need to added rating API, but now it can be done like above
+- Need to added rating API, but now it can be done like any of the above API
+- We can have any strong authentication mechanism in place
