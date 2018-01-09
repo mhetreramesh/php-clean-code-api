@@ -47,6 +47,18 @@
 - [gabordemooij/redbean](https://packagist.org/packages/gabordemooij/redbean) - A micro ORM for PHP
 - [phpunit/phpunit](https://packagist.org/packages/phpunit/phpunit) - Testing framework
 
+## Directory Structure
+- `web` - Everything related to business
+    - `core` - The main business logic & persistance part
+        - `Adapter` - Define rules using interfaces for business logic
+        - `Factory` - The business logic access point for mediator
+        - `Service` - Wrappers for third party plugins & applications
+        - `Usecase` - A specefic business usecase will be coded here
+    - `migrations` - All migrations and its log used `phpmig` package for that
+    - `public` - Entry point of the project. Only this part is accessible to outside world
+    - `src` - Mediator to serve the request & connect business logic & DB
+    - `tests` - All tests written for the project. (Right now I've only written for /core/Usecases part)
+
 ## Improvements needed
 - Need to added rating API, but now it can be done like any of the above API
 - We can have any strong authentication mechanism in place
