@@ -48,6 +48,7 @@ class RecipesController extends BaseApiController
 
     public function create()
     {
+        $this->authenticate();
         $data = [
             'name' => $this->request->getParameter('name', 'Test Recipe'),
             'prep_time' => $this->request->getParameter('prep_time', '1 Hour'),
@@ -63,6 +64,7 @@ class RecipesController extends BaseApiController
 
     public function update($input)
     {
+        $this->authenticate();
         $data = [
             'name' => $this->request->getParameter('name'),
             'prep_time' => $this->request->getParameter('prep_time'),
@@ -78,6 +80,7 @@ class RecipesController extends BaseApiController
 
     public function delete()
     {
+        $this->authenticate();
         UserFactory::deleteRecipe()->execute($data);
         $data = [];
         $this->response->setContent($data);

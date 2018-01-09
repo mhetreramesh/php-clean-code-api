@@ -19,4 +19,11 @@ class BaseApiController
         $this->response = $response;
         $this->fractal = new Manager();
     }
+
+    public function authenticate()
+    {
+        // We can place authentication logic here
+        // It can be just API key based or oauth2 or user specific
+        return;
+    }
 }
