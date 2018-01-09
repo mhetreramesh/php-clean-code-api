@@ -13,6 +13,7 @@
 - **DB Migrations** - Short command `bash migrate.sh` or ssh into php container & `run phpmig migrate` command
 - **Unit Test** - To Run Unit tests use `composer test` or use `bash phpunit.sh`
 - **API DOC** - You can access swagger API doc on `http://localhost:82/doc/index.html` URL
+- `GET` API with search, pagination all in this eample - [http://localhost:82/recipes?search=K&orderBy=id&orderDirection=desc&offset=0&limit=3](http://localhost:82/recipes?search=K&orderBy=id&orderDirection=desc&offset=0&limit=3)
 
 ## Clean code architecture
 
